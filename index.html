@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Text Heart Animation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <div id="ui">
+            </div>
+    </div>
+
+    <script>
+        const uiContainer = document.getElementById('ui');
+        const totalWords = 180; // Total text strings to form the shape
+
+        for (let i = 0; i < totalWords; i++) {
+            const wordDiv = document.createElement('div');
+            wordDiv.className = 'ui__love_word';
+            wordDiv.innerText = 'i love you';
+            
+            // Pass the index as a CSS variable for delay calculations
+            wordDiv.style.setProperty('--i', i);
+            
+            // Mathematical Parametric Heart Curve equations
+            const angle = (i / totalWords) * 2 * Math.PI;
+            
+            // Heart curve equations scaled up
+            const x = 16 * Math.pow(Math.sin(angle), 3) * 15;
+            const y = -(13 * Math.cos(angle) - 5 * Math.cos(2 * angle) - 2 * Math.cos(3 * angle) - Math.cos(4 * angle)) * 15;
+            const z = Math.sin(angle * 2) * 50; // Adds depth to the ring
+
+            // Set the positions as custom CSS variables
+            wordDiv.style.setProperty('--x', `${x}px`);
+            wordDiv.style.setProperty('--y', `${y}px`);
+            wordDiv.style.setProperty('--z', `${z}px`);
+
+            uiContainer.appendChild(wordDiv);
+        }
+    </script>
+</body>
+</html>
